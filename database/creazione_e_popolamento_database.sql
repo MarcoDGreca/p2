@@ -27,7 +27,7 @@ DROP TABLE IF EXISTS `cliente`;
 CREATE TABLE `cliente` (
   `email` varchar(100) NOT NULL,
   `username` varchar(100) DEFAULT NULL,
-  `pwd` varchar(5000) DEFAULT NULL,
+  `pwd` varchar(60) DEFAULT NULL, -- aggiorna la lunghezza a 60
   `nome` varchar(100) NOT NULL,
   `cognome` varchar(100) NOT NULL,
   `data_nascita` date NOT NULL,
@@ -41,6 +41,7 @@ CREATE TABLE `cliente` (
   CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`carta_credito`) REFERENCES `metodo_pagamento` (`numero_carta`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `cliente_ibfk_2` FOREIGN KEY (`indirizzo`, `cap`) REFERENCES `indirizzo_spedizione` (`indirizzo`, `cap`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

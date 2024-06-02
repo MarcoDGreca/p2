@@ -241,5 +241,30 @@ public class UserDao implements UserDaoInterfaccia {
 		}
 	}
 
-	}
 
+public UserBean doRetrieveByUsername(String username) throws SQLException {
+    Connection con = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+    try {
+        con = ds.getConnection();
+        String sql = "SELECT * FROM cliente WHERE username = ?";
+        ps = con.prepareStatement(sql);
+        ps.setString(1, username);
+        rs = ps.executeQuery();
+
+        if (rs.next()) {
+            UserBean user = new UserBean();
+            user.setUsername(rs.getString("username"));
+            user.setPassword(rs.getString("password"));
+            // imposta gli altri campi del bean
+            return user;
+        }
+    } finally {
+        // chiudi risorse
+    }
+    return null;
+}
+
+}
